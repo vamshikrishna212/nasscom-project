@@ -6,11 +6,11 @@ few_shot = FewShotPosts()
 
 def get_length_str(length):
     if length == "Short":
-        return "7 to 8 lines"
+        return "1 paragraph"
     if length == "Medium":
-        return "8 to 12 lines"
+        return "2 to 3 paragraphs"
     if length == "Long":
-        return "12 to 18 lines"
+        return "4 to 5 paragraph"
 
 
 def generate_post(length, language, tag,scenario):
@@ -36,7 +36,8 @@ def get_prompt(length, language, tag,scenario):
 
 **Requirements**:  
 - Wrap the entire email in a `<div class='email-template'>` tag.  
-- Use `<p>` tags for paragraphs and `<br>` for line breaks.  
+- Use `<p>` tags for paragraphs and `<br>` for line breaks . 
+- Each paragraph must be  minimum of 4-5 lines  
 - Highlight placeholders like [Name] with `<span class='placeholder'>[Name]</span>`.  
 - Include a subject line inside `<p class='subject'>`.  
 - Preserve indentation and line breaks using proper HTML (no Markdown).  
