@@ -6,11 +6,11 @@ few_shot = FewShotPosts()
 
 def get_length_str(length):
     if length == "Short":
-        return "1 to 5 lines"
+        return "7 to 8 lines"
     if length == "Medium":
-        return "6 to 10 lines"
+        return "8 to 12 lines"
     if length == "Long":
-        return "11 to 15 lines"
+        return "12 to 18 lines"
 
 
 def generate_post(length, language, tag):
@@ -23,7 +23,8 @@ def get_prompt(length, language, tag):
     length_str = get_length_str(length)
 
     prompt = f'''
-    Generate a LinkedIn post using the below information. No preamble.
+    Generate a Email using the below information. No preamble.
+    Provide word breakers like \n,\t,\v and more in the email
 
     1) Topic: {tag}
     2) Length: {length_str}
@@ -33,8 +34,8 @@ def get_prompt(length, language, tag):
     '''
     # prompt = prompt.format(post_topic=tag, post_length=length_str, post_language=language)
 
-    examples = few_shot.get_filtered_posts(length, language, tag)
-
+    #examples = few_shot.get_filtered_posts(length, language, tag)
+    examples = []
     if len(examples) > 0:
         prompt += "4) Use the writing style as per the following examples."
 
@@ -49,4 +50,4 @@ def get_prompt(length, language, tag):
 
 
 if __name__ == "__main__":
-    print(generate_post("Medium", "English", "Mental Health"))
+    print(generate_post("Medium", "English", "Professional"))

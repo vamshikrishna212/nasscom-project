@@ -10,13 +10,14 @@ language_options = ["English", "Hinglish"]
 
 # Main app layout
 def main():
-    st.subheader("LinkedIn Post Generator: Codebasics")
+    st.subheader("Email Generator: NassCom Project")
 
     # Create three columns for the dropdowns
     col1, col2, col3 = st.columns(3)
 
     fs = FewShotPosts()
-    tags = fs.get_tags()
+    #tags = fs.get_tags()
+    tags = ["Formal", "Casual", "Friendly", "Professional", "Persuasive", "Apologetic", "Appreciative", "Introduction", "Follow-up", "Thank You", "Apology", "Complaint", "Invitation", "Job Application", "Networking", "Reminder", "Announcement", "Feedback Request", "Sales Pitch", "Very Formal", "Semi-Formal", "Informal", "Colleague", "Boss", "Client", "Customer", "Friend", "Professor", "Recruiter", "Vendor", "Bullet Points", "Paragraph-Based", "Hybrid", "Low", "Moderate", "High", "Personalized", "Generic", "Template-Based", "No Response Needed", "Response Expected", "Follow-Up Required"]
     with col1:
         # Dropdown for Topic (Tags)
         selected_tag = st.selectbox("Topic", options=tags)
@@ -34,6 +35,7 @@ def main():
     # Generate Button
     if st.button("Generate"):
         post = generate_post(selected_length, selected_language, selected_tag)
+        
         st.write(post)
 
 
