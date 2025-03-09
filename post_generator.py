@@ -13,14 +13,14 @@ def get_length_str(length):
         return "4 to 5 paragraph"
 
 
-def generate_post(length, language, tag,scenario):
-    prompt = get_prompt(length, language, tag,scenario)
+def generate_post(length, language, tag,scenario,sender,receiver):
+    prompt = get_prompt(length, language, tag,scenario,sender,receiver)
     response = llm.invoke(prompt)
     print(response.content)
     return response.content
 
 
-def get_prompt(length, language, tag,scenario):
+def get_prompt(length, language, tag,scenario,sender,receiver):
     length_str = get_length_str(length)
 
     
@@ -33,10 +33,12 @@ def get_prompt(length, language, tag,scenario):
 2. **Length**:{length_str}  
 3. **Language**:  {language}
 4. **Scenario**: {scenario}
+5. **Sender's Name** : {sender}
+5. **Receiver's Name/Designation** : {receiver}
 
 **Requirements**:  
 - Wrap the entire email in a `<div class='email-template'>` tag.  
-- Use `<p>` tags for paragraphs and `<br>` for line breaks . 
+- Use `<p class="email-para">` tags for paragraphs and `<br>` for line breaks .
 - Each paragraph must be  minimum of 4-5 lines  
 - Highlight placeholders like [Name] with `<span class='placeholder'>[Name]</span>`.  
 - Include a subject line inside `<p class='subject'>`.  
@@ -45,7 +47,7 @@ def get_prompt(length, language, tag,scenario):
 
 Return **only the HTML code**, no explanations.
 
-    '''.format(tag=tag, length_str=length_str, language=language, scenario=scenario)
+    '''.format(tag=tag, length_str=length_str, language=language, scenario=scenario,sender=sender,receiver=receiver)
     examples = []
     if len(examples) > 0:
         prompt += "4) Use the writing style as per the following examples."
@@ -61,4 +63,4 @@ Return **only the HTML code**, no explanations.
 
 
 if __name__ == "__main__":
-    print(generate_post("Medium", "English", "Professional","permission from my teacher for a leave , for my brothers marriage"))
+    print(generate_post("Medium", "English", "Professional","permission from my teacher for a leave , for my brothers marriage","Vamshi","Rama Krishnan"))
