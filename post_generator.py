@@ -28,39 +28,23 @@ def get_prompt(length, language, tag,scenario):
 
     #examples = few_shot.get_filtered_posts(length, language, tag)
     prompt = '''
-    generate an email by taking in consideration of the following : NO PREAMBLE
-    Type : {tag}
-    Length : {length_str}
-    Language :  {language}
-    Scenario : {scenario}
-    ###
-    give the response with escape sequences like \n , \t
+        Generate an email in HTML format for display on a website. Follow these rules: NO PREAMBLE  
+1. **Type**: {tag}
+2. **Length**:{length_str}  
+3. **Language**:  {language}
+4. **Scenario**: {scenario}
+
+**Requirements**:  
+- Wrap the entire email in a `<div class='email-template'>` tag.  
+- Use `<p>` tags for paragraphs and `<br>` for line breaks.  
+- Highlight placeholders like [Name] with `<span class='placeholder'>[Name]</span>`.  
+- Include a subject line inside `<p class='subject'>`.  
+- Preserve indentation and line breaks using proper HTML (no Markdown).  
 
 
-    ######
-    Example response for type Professional , 18 lines , and english: 
-Dear Manager,\n
-\tI am writing to inform you that, unfortunately, I will be unable to come to work for the next few days.\n
-\tI am currently not feeling well and my health is not in the best condition.\n
-\tI have been diagnosed with an illness that requires me to take some time off to recover.\n
-\tI apologize for any inconvenience this may cause and will make sure to catch up on any missed work as soon as possible.\n
-\tI will keep you updated on my status and provide a doctor's note if needed.\n
-\tThe expected dates of my leave are from [start date] to [end date].\n
-\tI will be available by email if anything urgent comes up while I am away.\n
-\tPlease let me know if there are any pressing matters that need my attention before my leave.\n
-\tI appreciate your understanding and support during this time.\n
-\tIf there is anything I can do to mitigate the impact of my absence, please let me know.\n
-\tI am committed to my responsibilities and will ensure a smooth transition of tasks.\n
-\tI will respond to all emails and messages as soon as I am feeling better.\n
-\tThank you for your consideration and I look forward to returning to work as soon as possible.\n
-\tPlease do not hesitate to contact me if you have any questions or concerns.\n
-\tSincerely,\n
-\t[Your Name]\n
-Best regards, \n
-[Your Name]
+Return **only the HTML code**, no explanations.
 
-
-    '''
+    '''.format(tag=tag, length_str=length_str, language=language, scenario=scenario)
     examples = []
     if len(examples) > 0:
         prompt += "4) Use the writing style as per the following examples."
