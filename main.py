@@ -40,12 +40,14 @@ def main():
 
     # Generate Button
     if st.button("Generate"):
+        st.session_state.chat_history = []
         st.session_state.prompt = get_prompt(selected_length, selected_language, selected_tag, scenario, sender, receiver)
         st.session_state.generated_email = generate_post(st.session_state.prompt)
-        st.session_state.modification_history = st.session_state.prompt  # Store base prompt for modifications
+        st.session_state.modification_history = st.session_state.prompt  
+
 
     # Layout for email and chatbot-style modifications
-    col_email, col_modifications = st.columns([3, 2])
+    col_email, col_modifications = st.columns([5,4])
 
     with col_email:
         # Display the generated email
@@ -76,7 +78,7 @@ def main():
                 st.write(chat)
 
         # Modification request input
-        modification_request = st.text_area("Enter Modification Request:", "Eg: Make it more formal, Add a thank you note, etc.")
+        modification_request = st.text_area("", "What any changes? ")
 
         if st.button("Regenerate"):
             st.session_state.modification_history += f" *** Modification Request {st.session_state.idx}*** {modification_request}"
